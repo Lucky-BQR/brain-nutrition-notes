@@ -3,6 +3,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 function txt(s,x,y,size=24,color='#183F4D',anchor='middle',weight=400){return `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" text-anchor="${anchor}" font-weight="${weight}">${esc(s)}</text>`;}
 function box(n,x,y,w=238,h=104,c='#19586B'){return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="white" stroke="${c}" stroke-width="2"/>${txt(n[0],x+w/2,y+42,25,c,'middle',700)}${txt(n[1],x+w/2,y+77,18,'#506875')}`;}
 function line(x,y,X,Y,c='#7CA3AD',arrow=false,dash=false){return `<path d="M${x},${y} L${X},${Y}" fill="none" stroke="${c}" stroke-width="3" ${dash?'stroke-dasharray="7 7"':''} ${arrow?'marker-end="url(#arrow)"':''}/>`;}
+let uid=0;
 function diagram(t){let s='',n=t.nodes,c=t.color;const center={ '02':'神经活动','06':'气味体验','10':'肠道生态','13':'疼痛体验','22':'日常功能'};
 if(t.id==='04'){
  const pos=[[25,170],[275,170],[275,18],[530,18],[530,170],[780,170]];s+=line(239,222,275,222,c,true)+line(489,222,530,222,c,true)+line(744,222,780,222,c,true)+line(382,122,625,170,c,true)+line(637,122,637,170,c,true);n.forEach((a,i)=>s+=box(a,pos[i][0],pos[i][1],i===5?205:214,104,c));s+=txt('食物主通道：口腔 / 食管 → 胃 → 小肠 → 大肠',500,365,27,c);s+=txt('肝胆与胰腺提供旁路分泌，不是食物经过的通道',500,415,23);s+=txt('示意位置，不按解剖比例',500,490,18,'#667E88');
@@ -23,7 +24,8 @@ if(t.id==='04'){
 }else{
  let p=[[45,65],[380,65],[715,65],[715,330],[380,330],[45,330]];n.forEach((a,i)=>{if(i<n.length-1){let [x,y]=p[i],[X,Y]=p[i+1];if(y===Y){s+=line(x+(X>x?245:0),y+56,X+(X>x?0:245),Y+56,c,true)}else s+=line(x+122,y+112,X+122,Y,c,true)}s+=box(a,p[i][0],p[i][1],245,112,c)});s+=txt(t.id==='01'?'知识组织路径，不是疾病诊断流程':'顺序表示过程或阅读步骤',500,540,20,'#607880');
 }
-return `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-label="${esc(t.title)}关系图"><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="${c}"/></marker></defs><rect width="1000" height="580" rx="24" fill="#EDF5F6"/><g font-family="Microsoft YaHei,Arial,sans-serif">${s}</g></svg>`;
+const mid=`arrow-${t.id}-${++uid}`;s=s.replaceAll('url(#arrow)',`url(#${mid})`);
+return `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-label="${esc(t.title)}关系图"><defs><marker id="${mid}" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="${c}"/></marker></defs><rect width="1000" height="580" rx="24" fill="#EDF5F6"/><g font-family="Microsoft YaHei,Arial,sans-serif">${s}</g></svg>`;
 }
 window.atlasDiagram=diagram;
 window.atlasPoster=t=>`<div class="poster" style="--topic:${t.color}"><header><span>脑营养学 · 视觉学习图册</span><span>${window.ATLAS.groups[t.group][0]} / ${t.id}</span></header><h1>${esc(t.title)}</h1><p class="poster-subtitle">${esc(t.subtitle)}</p><div class="poster-diagram">${diagram(t)}</div><div class="poster-points">${t.points.map((p,i)=>`<p><b>${i+1}</b>${esc(p)}</p>`).join('')}</div><div class="poster-boundary"><b>理解边界</b><p>${esc(t.boundary)}</p></div><footer><span>课程定位：${esc(t.source)}</span><span>学习用概念图 · 2026.10</span></footer></div>`;
