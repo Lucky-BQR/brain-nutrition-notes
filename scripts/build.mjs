@@ -199,7 +199,8 @@ const ICON = {
 };
 
 function shell({ slug, title, body, desc }) {
-  const nav = NAV.map((p) => `<a href="${p.slug === 'index' ? './' : p.slug + '.html'}"${p.slug === slug ? ' aria-current="page"' : ''}>${p.nav}</a>`).join('');
+  const nav = NAV.map((p) => `<a href="${p.slug === 'index' ? './' : p.slug + '.html'}"${p.slug === slug ? ' aria-current="page"' : ''}>${p.nav}</a>`).join('')
+    + '<a class="nav-atlas" href="atlas/">图解图册</a>';
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -287,7 +288,8 @@ function homePage(results) {
   const cards = PAGES.map((p) => {
     const r = results[p.slug];
     return `<a class="card" href="${p.slug}.html"><span class="card-kicker">${p.nav}</span><span class="card-title">${p.title}</span><span class="card-desc">${p.desc}</span><span class="card-meta">${wan(r.words)}${p.slug === 'notes' ? ' · 32 章' : ''}${p.slug === 'advice' ? ` · ${supplementCount} 种补剂` : ''}</span></a>`;
-  }).join('');
+  }).join('')
+    + '<a class="card card-wide" href="atlas/"><span class="card-kicker">图解图册</span><span class="card-title">脑营养学 · 视觉学习图册</span><span class="card-desc">把两天课程重新画成 24 张主题图解和高清海报，附理解自测、收藏和离线下载。适合先看图建立整体印象，再回来读笔记。</span><span class="card-meta">24 个主题 · 24 张海报 · 8 个补充专题 →</span></a>';
   const pdfs = PAGES.map((p) => `<li><a href="pdf/${p.pdf}" download="${p.pdfName}">${ICON.pdf}<span>${p.title}</span></a><small data-pdf="${p.pdf}"></small></li>`).join('');
   const ideas = [
     ['营养、免疫、代谢是影响全脑的"全局因素"', '全脑普遍偏差时，先找全局原因，给足营养支持再训练。', 1, 2],
