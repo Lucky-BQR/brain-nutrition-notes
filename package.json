@@ -1,0 +1,13 @@
+{
+  "name": "brain-nutrition-notes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "pdf": "node scripts/pdf.mjs"
+  },
+  "dependencies": {
+    "marked": "^14.1.4",
+    "puppeteer-core": "^23.11.1"
+  }
+}
