@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="脑营养学课堂笔记：29个主题，以文字卡片和表格整理。支持全文搜索、高清图片与整本PDF下载。">
+  <meta name="theme-color" content="#ffffff">
+  <title>脑营养学课堂笔记</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="notes.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="topbar">
+    <a class="brand" href="#topic-02">脑营养学课堂笔记</a>
+    <span class="edition">简洁整理版</span>
+    <nav class="top-actions" aria-label="整套笔记下载">
+      <button class="quiet-button" id="gallery-open" type="button">全部图片</button>
+      <a class="quiet-button" href="downloads/brain-nutrition-notes.pdf" target="_blank" rel="noopener">整本 PDF</a>
+      <a class="download-all" href="downloads/brain-nutrition-notes-images-pdf.zip" download>下载完整包</a>
+    </nav>
+  </header>
+  <div class="mobile-nav">
+    <button id="menu-toggle" type="button" aria-controls="sidebar" aria-expanded="false">目录与搜索</button>
+    <span id="mobile-position">1 / 29</span>
+  </div>
+  <button id="menu-backdrop" class="menu-backdrop" type="button" aria-label="关闭目录" hidden></button>
+  <div class="workspace">
+    <aside id="sidebar" class="sidebar" aria-label="笔记目录">
+      <div class="sidebar-heading"><h2>学习目录</h2><button id="menu-close" class="quiet-button" type="button">关闭</button></div>
+      <div class="search-wrap"><label for="search">搜索全部笔记</label><input id="search" type="search" placeholder="搜索主题或知识点" autocomplete="off"><button id="search-clear" type="button" hidden>清除</button></div>
+      <p class="search-count" id="search-count" role="status" aria-live="polite">29 个主题</p>
+      <nav id="topic-list" aria-label="主题列表"></nav>
+      <p class="search-empty" id="search-empty" hidden>没有找到相关笔记，试试“胃酸”“维生素”或更短的关键词。</p>
+      <p class="sidebar-note">由六份课堂逐字稿整理。<br>图片与 PDF 使用同一套内容。</p>
+    </aside>
+    <main id="main" tabindex="-1">
+      <div class="reading-meta"><span id="group-label"></span><span id="pdf-page"></span></div>
+      <article id="note" aria-labelledby="note-title">
+        <header class="note-heading"><h1 id="note-title" tabindex="-1">脑营养的整体框架</h1><p id="note-subtitle"></p></header>
+        <div class="reading-tools">
+          <div class="view-switch" role="group" aria-label="阅读方式"><button id="text-view" type="button" aria-pressed="true">文字笔记</button><button id="image-view" type="button" aria-pressed="false">高清原图</button></div>
+          <a id="download-image" class="text-link" href="images/note-02.png" download>下载本页图片</a>
+        </div>
+        <div id="text-content"></div>
+        <div id="image-content" hidden><p class="image-help">图片可保存到手机；点击图片可打开完整尺寸。</p><a id="image-full" target="_blank" rel="noopener"><img id="note-image" alt="" decoding="async"></a></div>
+        <nav class="page-navigation" aria-label="前后主题"><button id="previous" type="button"><span>上一篇</span><strong></strong></button><button id="next" type="button"><span>下一篇</span><strong></strong></button></nav>
+      </article>
+      <footer class="reading-footer"><p>本笔记用于课程学习，保留课堂观点与核查补充的区别。原稿时间戳可用于回查；未核听原音频。</p><a href="downloads/brain-nutrition-notes.pdf" target="_blank" rel="noopener">查看 36 页 PDF</a></footer>
+      <noscript><p>请启用 JavaScript 浏览和搜索文字笔记，或直接打开 <a href="downloads/brain-nutrition-notes.pdf">整本 PDF</a> 阅读。</p></noscript>
+    </main>
+  </div>
+  <dialog id="gallery" aria-labelledby="gallery-title">
+    <header class="gallery-heading"><div><h2 id="gallery-title">全部 36 张图片</h2><p>编号与 PDF 页码一致，点击打开高清原图。</p></div><button id="gallery-close" class="quiet-button" type="button">关闭</button></header>
+    <div id="gallery-list"></div>
+    <footer><a class="download-all" href="downloads/brain-nutrition-notes-images-pdf.zip" download>下载全部图片和 PDF</a></footer>
+  </dialog>
+</body>
+</html>
